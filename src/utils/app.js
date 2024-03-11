@@ -1,12 +1,18 @@
 import axios from 'axios'
 
-const getArticles = () => {
-    let url = `https://nc-news-xooy.onrender.com/api/articles`;
+const getArticles = (articleId) => {
+  let url = `https://nc-news-xooy.onrender.com/api/articles`;
 
-    return axios.get(url).then((response) => {
-        const articlesArray = response.data.articles
-      return articlesArray
+  if (articleId) {
+    return axios.get(`${url}/${articleId}`).then((response) => {
+      const singleArticle = response.data.article;
+      return singleArticle;
     });
-  };
-  
-export { getArticles }
+  }
+  return axios.get(url).then((response) => {
+    const articlesArray = response.data.articles;
+    return articlesArray;
+  });
+};
+
+export { getArticles };
