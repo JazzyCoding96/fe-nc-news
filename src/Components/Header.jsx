@@ -1,0 +1,10 @@
+import React from 'react'
+
+function Header() {
+console.log("In the header")
+  return (
+    <h1>Welcome to NC News!</h1>
+  )
+}
+
+export default Header
