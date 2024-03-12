@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getArticles } from '../utils/app';
 import ArticleCard from './ArticleCard';
 
+
 function ArticleList() {
   const [articles, setArticles] = useState([]);
 

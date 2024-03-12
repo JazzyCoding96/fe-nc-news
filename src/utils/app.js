@@ -22,7 +22,14 @@ const getComments = (articleId) => {
     const commentsArray = response.data.comments;
     return commentsArray;
   });
-
 }
 
-export { getArticles, getComments };
+const patchArticle = (articleId) => {
+    const patchBody = { inc_votes: 1 }
+    return axios.patch(`https://nc-news-xooy.onrender.com/api/articles/${articleId}`, patchBody).then((response) => {
+        console.log("Patch successful");
+        return response.data.articles
+    })
+} 
+
+export { getArticles, getComments, patchArticle };
