@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios";
 
 const getArticles = (articleId) => {
   let url = `https://nc-news-xooy.onrender.com/api/articles`;
@@ -22,14 +22,32 @@ const getComments = (articleId) => {
     const commentsArray = response.data.comments;
     return commentsArray;
   });
-}
+};
 
 const patchArticle = (articleId) => {
-    const patchBody = { inc_votes: 1 }
-    return axios.patch(`https://nc-news-xooy.onrender.com/api/articles/${articleId}`, patchBody).then((response) => {
-        console.log("Patch successful");
-        return response.data.articles
-    })
-} 
+  const patchBody = { inc_votes: 1 };
+  return axios
+    .patch(
+      `https://nc-news-xooy.onrender.com/api/articles/${articleId}`,
+      patchBody
+    )
+    .then((response) => {
+      return response.data.articles;
+    });
+};
 
-export { getArticles, getComments, patchArticle };
+const postComment = (formData) => {
+  const postBody = { username: formData.selectedUser, body: formData.newComment };
+  
+  return axios
+    .post(
+      `https://nc-news-xooy.onrender.com/api/articles/${formData.article_id}/comments`,
+      postBody
+    )
+    .then((response) => {
+        console.log(response.data.comment, "response ");
+      return response.data.comment;
+    });
+};
+
+export { getArticles, getComments, patchArticle, postComment };
