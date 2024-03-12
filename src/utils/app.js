@@ -15,4 +15,14 @@ const getArticles = (articleId) => {
   });
 };
 
-export { getArticles };
+const getComments = (articleId) => {
+  let url = `https://nc-news-xooy.onrender.com/api/articles/${articleId}/comments`;
+
+  return axios.get(url).then((response) => {
+    const commentsArray = response.data.comments;
+    return commentsArray;
+  });
+
+}
+
+export { getArticles, getComments };
