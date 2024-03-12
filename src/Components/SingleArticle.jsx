@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getArticles, getComments } from "../utils/app";
+import { getArticles, getComments, patchArticle } from "../utils/app";
 import CommentCard from "./CommentCard";
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+
 
 function SingleArticle() {
   const { article_id } = useParams();
@@ -17,6 +19,12 @@ function SingleArticle() {
     })
   }, [article_id]);
 
+  const upVote = (articleId) => {
+    setSingleArticle((currArticle) => {
+      return {...currArticle, votes: currArticle.votes + 1}
+    })
+    patchArticle(articleId)
+  }
   return (
     <div className="single-article">
       <h1>{singleArticle.title}</h1>
@@ -26,6 +34,9 @@ function SingleArticle() {
       <p>{singleArticle.body}</p>
       <p>Comment Count: {singleArticle.comment_count}</p>
       <p>Votes: {singleArticle.votes}</p>
+      <button onClick={() => upVote(singleArticle.article_id)}>
+        <span aria-label="Upvote Article"><ArrowCircleUpIcon/></span>
+      </button>
 
       <h2>Comments:</h2>
       <ul>
