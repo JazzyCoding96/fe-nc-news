@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getArticles, getComments, patchArticle } from "../utils/app";
 import CommentCard from "./CommentCard";
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+import CommentAdder from "./CommentAdder";
 
 
 function SingleArticle() {
@@ -23,8 +24,13 @@ function SingleArticle() {
     setSingleArticle((currArticle) => {
       return {...currArticle, votes: currArticle.votes + 1}
     })
-    patchArticle(articleId)
+    patchArticle(articleId).catch(() => {
+      setSingleArticle((currArticle) => {
+      return {...currArticle, votes: currArticle.votes - 1}
+      })
+    })
   }
+  
   return (
     <div className="single-article">
       <h1>{singleArticle.title}</h1>
@@ -39,11 +45,14 @@ function SingleArticle() {
       </button>
 
       <h2>Comments:</h2>
+      <CommentAdder setComments={setComments}/>
+
       <ul>
         {comments.map((comment) => {
           return <CommentCard key={comment.comment_id} comment= {comment}/>
         })}
       </ul>
+
     </div>
   );
 }
