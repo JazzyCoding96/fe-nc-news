@@ -2,26 +2,24 @@ import React, { useState } from "react";
 import { postComment } from "../utils/app";
 import { useParams } from "react-router-dom";
 
-
-function CommentAdder({ setComments }) {
-    const { article_id } = useParams()
+function CommentAdder({ setComments, setSelectedUser, selectedUser }) {
+  const { article_id } = useParams();
   const [newComment, setNewComment] = useState("");
-  const [selectedUser, setSelectedUser] = useState("jessjelly")
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = {newComment, selectedUser, article_id}
+    const formData = { newComment, selectedUser, article_id };
 
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
     postComment(formData).then((postedComment) => {
-        setNewComment("")
-        setComments((currComments) => {
-            return [postedComment, ...currComments]
-        })
-        setIsSubmitting(false)
-    })
+      setNewComment("");
+      setComments((currComments) => {
+        return [postedComment, ...currComments];
+      });
+      setIsSubmitting(false);
+    });
   };
 
   return (

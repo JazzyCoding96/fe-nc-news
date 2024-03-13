@@ -50,4 +50,10 @@ const postComment = (formData) => {
     });
 };
 
-export { getArticles, getComments, patchArticle, postComment };
+const deleteComment = (commentId) => {
+    console.log(commentId);
+    return axios.delete(`https://nc-news-xooy.onrender.com/api/comments/${commentId}`)
+
+}
+
+export { getArticles, getComments, patchArticle, postComment, deleteComment };

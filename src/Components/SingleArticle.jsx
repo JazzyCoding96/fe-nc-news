@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getArticles, getComments, patchArticle } from "../utils/app";
+import { deleteComment, getArticles, getComments, patchArticle } from "../utils/app";
 import CommentCard from "./CommentCard";
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import CommentAdder from "./CommentAdder";
@@ -10,6 +10,8 @@ function SingleArticle() {
   const { article_id } = useParams();
   const [singleArticle, setSingleArticle] = useState({});
   const [comments, setComments] = useState([])
+  const [selectedUser, setSelectedUser] = useState("jessjelly")
+
 
   useEffect(() => {
     getArticles(article_id).then((articleData) => {
@@ -30,6 +32,16 @@ function SingleArticle() {
       })
     })
   }
+
+  const handleDeleteComment = (commentId) => {
+    deleteComment(commentId).then(() => {
+      setComments((prevComments) => {
+        return prevComments.filter((comment) => {
+          return comment.comment_id != commentId
+        })
+      })
+    })
+  }
   
   return (
     <div className="single-article">
@@ -45,11 +57,11 @@ function SingleArticle() {
       </button>
 
       <h2>Comments:</h2>
-      <CommentAdder setComments={setComments}/>
+      <CommentAdder setComments={setComments} setSelectedUser={setSelectedUser} selectedUser={selectedUser}/>
 
       <ul>
         {comments.map((comment) => {
-          return <CommentCard key={comment.comment_id} comment= {comment}/>
+          return <CommentCard key={comment.comment_id} comment= {comment} selectedUser={selectedUser} handleDeleteComment={handleDeleteComment}/>
         })}
       </ul>
 
