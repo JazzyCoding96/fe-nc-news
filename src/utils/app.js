@@ -53,7 +53,6 @@ const postComment = (formData) => {
 };
 
 const deleteComment = (commentId) => {
-  console.log(commentId);
   return axios.delete(
     `https://nc-news-xooy.onrender.com/api/comments/${commentId}`
   );
@@ -63,7 +62,6 @@ const getFilteredArticles = (topic) => {
   const url = `https://nc-news-xooy.onrender.com/api/articles?topic=${topic}`;
 
   return axios.get(url).then((response) => {
-    console.log(response);
     const articlesArray = response.data.filteredArticles;
     return articlesArray;
   });
