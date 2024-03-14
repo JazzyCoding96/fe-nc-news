@@ -37,23 +37,43 @@ const patchArticle = (articleId) => {
 };
 
 const postComment = (formData) => {
-  const postBody = { username: formData.selectedUser, body: formData.newComment };
-  
+  const postBody = {
+    username: formData.selectedUser,
+    body: formData.newComment,
+  };
+
   return axios
     .post(
       `https://nc-news-xooy.onrender.com/api/articles/${formData.article_id}/comments`,
       postBody
     )
     .then((response) => {
-        console.log(response.data.comment, "response ");
       return response.data.comment;
     });
 };
 
 const deleteComment = (commentId) => {
-    console.log(commentId);
-    return axios.delete(`https://nc-news-xooy.onrender.com/api/comments/${commentId}`)
+  console.log(commentId);
+  return axios.delete(
+    `https://nc-news-xooy.onrender.com/api/comments/${commentId}`
+  );
+};
 
-}
+const getFilteredArticles = (topic) => {
+  const url = `https://nc-news-xooy.onrender.com/api/articles?topic=${topic}`;
 
-export { getArticles, getComments, patchArticle, postComment, deleteComment };
+  return axios.get(url).then((response) => {
+    console.log(response);
+    const articlesArray = response.data.filteredArticles;
+    return articlesArray;
+  });
+};
+
+export {
+  getArticles,
+  getComments,
+  patchArticle,
+  postComment,
+  deleteComment,
+  getFilteredArticles,
+};
