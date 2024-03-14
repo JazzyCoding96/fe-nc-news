@@ -61,7 +61,7 @@ function SingleArticle() {
 
       <ul>
         {comments.map((comment) => {
-          return <CommentCard key={comment.comment_id} comment= {comment} selectedUser={selectedUser} handleDeleteComment={handleDeleteComment}/>
+          return <CommentCard key={comment.comment_id} comment={comment} selectedUser={selectedUser} handleDeleteComment={handleDeleteComment}/>
         })}
       </ul>
 
