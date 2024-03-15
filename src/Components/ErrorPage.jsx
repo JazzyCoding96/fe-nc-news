@@ -9,7 +9,7 @@ function ErrorPage({ error = { status: 404, data: { msg: 'Page Not Found' } } })
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
-        height: "100vh",
+        height: "70vh",
       }}
     >
       <h2>Error!</h2>
