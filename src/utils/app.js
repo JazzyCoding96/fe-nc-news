@@ -7,12 +7,16 @@ const getArticles = (articleId) => {
     return axios.get(`${url}/${articleId}`).then((response) => {
       const singleArticle = response.data.article;
       return singleArticle;
-    });
+    }).catch((err) => {
+       throw err
+    })
   }
   return axios.get(url).then((response) => {
     const articlesArray = response.data.articles;
     return articlesArray;
-  });
+  }).catch((err) => {
+    throw err
+ })
 };
 
 const getComments = (articleId) => {
@@ -64,7 +68,10 @@ const getFilteredArticles = (topic) => {
   return axios.get(url).then((response) => {
     const articlesArray = response.data.filteredArticles;
     return articlesArray;
-  });
+  }).catch((err) => {
+    console.log(err, "in get filtered articles");
+    throw err
+ })
 };
 
 export {

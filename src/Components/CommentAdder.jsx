@@ -38,7 +38,7 @@ function CommentAdder({ setComments, setSelectedUser, selectedUser }) {
         <option value="weegembump">weegembump</option>
       </select>
       <label htmlFor="newComment">Add a comment</label>
-      <textarea
+      <textarea required
         id="newComment"
         multiline="true"
         value={newComment}

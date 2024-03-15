@@ -2,15 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { getArticles, getFilteredArticles } from '../utils/app';
 import ArticleCard from './ArticleCard';
 import { useSearchParams } from 'react-router-dom'
+import { ClipLoader } from "react-spinners";
+import { useLoading } from '../contexts/LoadingContext';
+import ErrorPage from './ErrorPage';
 
 
 function ArticleList() {
   const [searchParams, setSearchParams] = useSearchParams({});
   const [articles, setArticles] = useState([]);
+  const [error, setError] = useState(null);
+  const { isLoading, setIsLoading } = useLoading();
   const [sortBy, setSortBy] = useState("");
   const topic = searchParams.get("topic") || "All";
 
   useEffect(() => {
+    setIsLoading(true)
     let articleFunc;
     if (topic === "All") {
       articleFunc = getArticles();
@@ -18,20 +24,19 @@ function ArticleList() {
       articleFunc = getFilteredArticles(topic);
     }
 
-    articleFunc.then(
-      (articleData) => {
-        const sortedArticles = sortBy
-          ? [...articleData].sort((a, b) => {
-            console.log(a, "this is a");
-            console.log(b, "this is b");
-              return b[sortBy] - a[sortBy];
-            })
-          : articleData;
-        setArticles(sortedArticles);
-      },
-      [topic, sortBy]
-    );
-  });
+    articleFunc.then((articleData) => {
+      const sortedArticles = sortBy
+        ? [...articleData].sort((a, b) => {
+            return b[sortBy] - a[sortBy];
+          })
+        : articleData;
+      setArticles(sortedArticles);
+      setIsLoading(false)
+    }).catch((err) => {
+      
+      setError(err.response)
+    })
+  }, [topic, sortBy]);
 
   const handleTopicChange = (e) => {
     const newTopic = e.target.value;
@@ -45,6 +50,25 @@ function ArticleList() {
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
   };
+
+  if(error){
+    return <ErrorPage error={error}/>
+  }
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "70vh",
+        }}
+      >
+        <ClipLoader color="#36d6c3" size={50} />
+      </div>
+    );
+  }
 
   return (
     <>
