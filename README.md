@@ -1,8 +1,54 @@
-# React + Vite
+# NC News
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live Demo
 
-Currently, two official plugins are available:
+Check out the live demo of the app here: https://ncnews2.netlify.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About the project
+
+This is a social news aggregation, web content rating and discussion website designed to consolidate understanding of creating C.R.U.D (Create, Read, Update, Delete) applications from a front end perspective. 
+
+### Key Features:
+
+**Articles**: Written content cover topics (coding, football and cooking)
+
+**Topics**: Articles can be viewed by their respective topics allowing users to swift through the list according to their needs.
+
+**Comments**: Users can post comments on individual articles to express opinion
+
+**User Ratings**: Articles have an upvote button, allowing users to express opinion other than posting comments.
+
+This project is built using the React framework.
+
+## Backend repository
+
+The backed for this project can be found at https://github.com/JazzyCoding96/news-backend-project
+
+## Minimum versions
+
+The minimum version of Node.js required is v20.0.0
+
+## Getting Started
+To run this project locally, follow these steps: 
+
+1. To clone this project, use following command: 
+```bash
+git clone https://github.com/JazzyCoding96/fe-nc-news
+```
+2. Navigate into the project directory:
+```bash
+cd fe-nc-news
+```
+
+3. Install the dependencies:
+```bash
+npm install
+```
+
+4. Start the application:
+```bash
+npm run dev
+```
+
+This will launch the app in development mode.
+
