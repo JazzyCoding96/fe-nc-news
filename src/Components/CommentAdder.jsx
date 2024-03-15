@@ -44,7 +44,7 @@ function CommentAdder({ setComments, setSelectedUser, selectedUser }) {
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
       ></textarea>
-      <button type="submit">{isSubmitting ? "Posting..." : "Post"}</button>
+      <button type="submit" className="capitalize bg-green-500 text-white hover:bg-green-700">{isSubmitting ? "Posting..." : "Post"}</button>
     </form>
   );
 }
